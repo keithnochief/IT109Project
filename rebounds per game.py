@@ -1,40 +1,43 @@
-def calculate_player_ppg():
-    print("Enter player stats for each game. Type 'done' when finished.\n")
-    
-    total_points = 0
-    total_rebounds = 0
-    games_played = 0
+def calculate_player_rpg():
 
+    game_stats = []
+
+    # Prompt user to enter the number of games
     while True:
         try:
-            points = input(f"Enter points for game {games_played + 1} (or 'done' to finish): ")
-            if points.lower() == 'done':
+            num_games = int(input("How many games (2-5)? "))
+            if 2 <= num_games <= 5:
                 break
-            rebounds = input(f"Enter rebounds for game {games_played + 1}: ")
-
-            
-            points = int(points)
-            rebounds = int(rebounds)
-
-            total_points += points
-            total_rebounds += rebounds
-            games_played += 1
+            else:
+                print("Please enter a number between 2 and 5.")
         except ValueError:
-            print("Invalid input. Please enter numeric values or 'done'.")
-            continue
+            print("Invalid input. Please enter a number.")
 
-    if games_played == 0:
-        print("\nNo games entered.")
-        return
+    # Collect stats for each game
+    for game in range(1, num_games + 1):
+        while True:
+            try:
+                print(f"\nGame {game}:")
+                rebounds = int(input("Enter rebounds: "))
 
-    avg_points = total_points / games_played
-    avg_rebounds = total_rebounds / games_played
+                game_stats.append({"game": game, "rebounds": rebounds})
+                break
+            except ValueError:
+                print("Invalid input. Please enter numeric values.")
 
-    print("\nPlayer Stats:")
-    print(f"Games Played: {games_played}")
-    print(f"Total Points: {total_points}")
+    # Calculate total and average stats
+    total_rebounds = sum(game["rebounds"] for game in game_stats)
+
+    avg_rebounds = total_rebounds / num_games
+
+    # Display results
+    print("\nPlayer Stats per Game:")
+    for game in game_stats:
+        print(f"Game {game['game']}: Rebounds = {game['rebounds']}")
+
+    print("\nSummary:")
+    print(f"Games Played: {num_games}")
     print(f"Total Rebounds: {total_rebounds}")
-    print(f"Average Points per Game: {avg_points:.2f}")
-    print(f"Average Rebounds per Game: {avg_rebounds}")
+    print(f"Average Rebounds per Game: {avg_rebounds:.2f}")
 
-calculate_player_ppg()
+calculate_player_rpg()
