@@ -10,3 +10,5 @@ The file contains the following python files
 7. rebounds_per_game.py
 8. standings.py
 9. turnover_statline.py
+10. apg txt.txt
+11. rpg txt.txt
